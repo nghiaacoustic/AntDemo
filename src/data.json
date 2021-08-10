@@ -1,0 +1,22 @@
+[
+{
+"id": 1,
+"name": "VinSmart Live",
+"price": 5700000,
+"img": "./img/sp_blackberry.png"
+},
+
+{
+"id": 2,
+"name": "Iphone XS Max",
+"price": 7600000,
+"img": "./img/sp_iphoneX.png"
+},
+
+{
+"id": 3,
+"name": "Meizu 16Xs",
+"price": 27000000,
+"img": "./img/sp_note7.png"
+}
+]
