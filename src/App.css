@@ -1,6 +1,18 @@
 @import '~antd/dist/antd.css';
+.card {
+    text-align: center;
+    border-radius: 8px;
+}
+.card img{
+    width: 350px;
+    height: 300px;
+    display: block;
+}
+.ant-col:last-child{
+    margin-right: 72px;
+}
 
-.modal{
+.modal {
     text-align: right;
     padding-right: 5%;
     padding-bottom: 5%;

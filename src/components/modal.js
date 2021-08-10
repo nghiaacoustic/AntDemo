@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Table } from 'antd'
+import { Modal, Button, Table, Space } from 'antd'
 
 import { connect } from 'react-redux'
 
@@ -45,6 +45,13 @@ class ModalComponent extends Component {
                 title: 'Quantity',
                 dataIndex: 'quantity',
                 key: 'quantity',
+                // render: () => (
+                //     <Space size="small">
+                //         <Button>+</Button>
+                //         {this.props.cart.quantity}
+                //         <Button>-</Button>
+                //     </Space>
+                // ),
             },
             {
                 title: 'Price',
@@ -55,7 +62,19 @@ class ModalComponent extends Component {
                 title: 'Total Price',
                 dataIndex: 'totalPrice',
                 key: 'totalPrice',
-            }
+            },
+            {
+                title: 'Action',
+                key: 'action',
+                render: () => (
+                    <Space size="middle">
+                        <a onClick={() => this.props.deleteCartItem()}>Delete</a>
+                        <Button onClick={()=>this.props.changeQuantity(true)}>+</Button>
+                        <Button onClick={() => this.props.changeQuantity(false)}>-</Button>
+                    </Space>
+                ),
+            },
+
         ]
         return (
             <>
@@ -70,9 +89,9 @@ class ModalComponent extends Component {
         return (
             <div className='modal'>
                 <Button type="primary" onClick={this.showModal}>
-                    Cart({})
+                    Cart({ })
                 </Button>
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+                <Modal width={800} title="Cart Items" visible={isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
                     {this.renderTable()}
                 </Modal>
             </div>
@@ -86,4 +105,20 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(ModalComponent)
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteCartItem: () => {
+            dispatch({
+                type: 'DELETE_CART',
+            })
+        },
+        changeQuantity: (status) => {
+            dispatch({
+                type: 'CHANGE_QUANTITY',
+                status
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent)

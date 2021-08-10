@@ -12,8 +12,9 @@ class Cart extends Component {
                 hoverable
                 style={{ width: 320 }}
                 cover={<img alt={product.img} src={product.img} />}
+                className='card-meta-detail card'
             >
-                <Meta title={product.name} description={product.price} />
+                <Meta title={product.name} description={product.price}  style={{marginBottom: '5px'}}/>
                 <Button onClick={() => { this.props.addCart(product) }}>Add cart</Button>
             </Card>
         )
