@@ -13,7 +13,7 @@ class Cart extends Component {
                 hoverable
                 style={{ width: 320 }}
                 cover={<img alt={product.img} src={product.img} />}
-                className='card-meta-detail card'
+                className='card-meta-detail cardC'
             >
                 <Meta title={product.name} description={product.price} style={{ marginBottom: '5px' }} />
                 <Tooltip title="Add cart">
