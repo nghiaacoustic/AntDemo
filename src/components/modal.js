@@ -66,11 +66,11 @@ class ModalComponent extends Component {
             {
                 title: 'Action',
                 key: 'action',
-                render: () => (
+                render: (row) => (
                     <Space size="middle">
                         <a onClick={() => this.props.deleteCartItem()}>Delete</a>
-                        <Button onClick={()=>this.props.changeQuantity(true)}>+</Button>
-                        <Button onClick={() => this.props.changeQuantity(false)}>-</Button>
+                        <Button onClick={() => this.props.changeQuantity(row, true)}>+</Button>
+                        <Button id='btnMinus' onClick={() => this.props.changeQuantity(row, false)}>-</Button>
                     </Space>
                 ),
             },
@@ -89,7 +89,7 @@ class ModalComponent extends Component {
         return (
             <div className='modal'>
                 <Button type="primary" onClick={this.showModal}>
-                    Cart({ })
+                    Cart({this.props.cart.reduce((total, item) => { return total + item.quantity }, 0)})
                 </Button>
                 <Modal width={800} title="Cart Items" visible={isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
                     {this.renderTable()}
@@ -101,7 +101,7 @@ class ModalComponent extends Component {
 
 const mapStateToProps = state => {
     return {
-        cart: state.GioHangReducer.cart
+        cart: state.cartReducer.cart
     }
 }
 
@@ -112,10 +112,13 @@ const mapDispatchToProps = dispatch => {
                 type: 'DELETE_CART',
             })
         },
-        changeQuantity: (status) => {
+        changeQuantity: (cartItem, status) => {
+            console.log(status)
+            console.log("TCL: cartItem", cartItem)
             dispatch({
                 type: 'CHANGE_QUANTITY',
-                status
+                cartItem,
+                status,
             })
         }
     }

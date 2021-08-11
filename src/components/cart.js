@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'antd';
-import { connect } from 'react-redux'
+import { Card, Button, Tooltip } from 'antd';
+import { connect } from 'react-redux';
+import { FiShoppingCart } from 'react-icons/fi'
 
 class Cart extends Component {
     render() {
@@ -14,8 +15,10 @@ class Cart extends Component {
                 cover={<img alt={product.img} src={product.img} />}
                 className='card-meta-detail card'
             >
-                <Meta title={product.name} description={product.price}  style={{marginBottom: '5px'}}/>
-                <Button onClick={() => { this.props.addCart(product) }}>Add cart</Button>
+                <Meta title={product.name} description={product.price} style={{ marginBottom: '5px' }} />
+                <Tooltip title="Add cart">
+                    <Button shape='round' type='ghost' onClick={() => { this.props.addCart(product) }}><FiShoppingCart style={{ margin: '5px 10px' }} /></Button>
+                </Tooltip>
             </Card>
         )
     }

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { GioHangReducer } from './cartReducer'
+import { cartReducer } from './cartReducer'
 
 export const rootReducer = combineReducers({
-    GioHangReducer,
+    cartReducer,
 })

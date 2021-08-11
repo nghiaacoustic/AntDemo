@@ -2,7 +2,7 @@ const initialState = {
     cart: []
 }
 
-export const GioHangReducer = (state = initialState, action) => {
+export const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_CART':
             let newCart = [...state.cart];
@@ -22,16 +22,19 @@ export const GioHangReducer = (state = initialState, action) => {
             state.cart = newCart1;
             return { ...state }
         case 'CHANGE_QUANTITY':
-            const {status} = action;
-            let newCart2 = [...state.cart];
-            let index1 = newCart2.findIndex(product => product.id === action.cartItem.id)
-            if(status){
-                newCart2[index1].quantity+=1;
-            }else{
-                newCart2[index1].quantity -= 1;
+            const { status, cartItem } = action;
+            // console.log(status)
+            let newCarts = [...state.cart];
+            let cartIndex = newCarts.findIndex((item) => item.id === cartItem.id)
+            if (status) {
+                newCarts[cartIndex].quantity += 1;
+            } else if (newCarts[cartIndex].quantity > 1) {
+                newCarts[cartIndex].quantity -= 1;
             }
-            state.cart = newCart2;
+            newCarts[cartIndex].totalPrice = newCarts[cartIndex].quantity * newCarts[cartIndex].price;
+            state.cart = newCarts;
+            return { ...state }
+        default:
             return { ...state }
     }
-    return { ...state }
 }
