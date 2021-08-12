@@ -5,6 +5,7 @@ import CartComponent from './components';
 import Home from './Layouts/Home/index';
 import PageNotFound from './Layouts/PageNotFound';
 import Flexbox from './Layouts/Flexbox/Flexbox';
+import ReactHookForm from './Layouts/ReactHookForm';
 
 //antd
 import { Layout, Menu } from 'antd';
@@ -33,9 +34,10 @@ function App() {
             <Menu.Item key="1" style={{ marginRight: '10px' }}>
               <Link to="/home">HomePage</Link>
             </Menu.Item>
-            <Menu.Item key="2"><Link to="/cart" exact>CartDemo</Link></Menu.Item>
-            <Menu.Item key="3"><Link to="/flexbox" exact>Flexbox</Link></Menu.Item>
-            <Menu.Item key="4"><Link to="/grid" exact>Grid</Link></Menu.Item>
+            <Menu.Item key="2" style={{ marginRight: '10px' }}><Link to="/cart" exact>CartDemo</Link></Menu.Item>
+            <Menu.Item key="3" style={{ marginRight: '10px' }}><Link to="/flexbox" exact>Flexbox</Link></Menu.Item>
+            <Menu.Item key="4" style={{ marginRight: '10px' }}><Link to="/grid" exact>Grid</Link></Menu.Item>
+            <Menu.Item key="5" style={{ marginRight: '10px' }}><Link to="/rhf" exact>ReactHookForm</Link></Menu.Item>
           </Menu>
         </Header>
       </Layout>
@@ -55,10 +57,13 @@ function App() {
           <Home />
         </Route>
         <Route path="/flexbox" exact>
-          <Flexbox/>
+          <Flexbox />
         </Route>
         <Route path="/grid" exact>
-          <Grid/>
+          <Grid />
+        </Route>
+        <Route path="/rhf" exact>
+          <ReactHookForm />
         </Route>
         <Route>
           <PageNotFound />

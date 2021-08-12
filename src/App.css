@@ -5,29 +5,29 @@
     padding: 0;
 }
 
-a {
+/* a {
     text-decoration: none;
-}
+} */
 
 /* img {
     display: block;
     max-width: 100%;
 } */
 
-body, input, button, textarea, select {
+/* body, input, button, textarea, select {
     outline: none;
     font-size: 12px;
     line-height: 1.5;
     font-family: "Poppins", sans-serif;
-}
+} */
 
-input {
+/* input {
     line-height: normal;
-}
+} */
 
-button {
+/* button {
     cursor: pointer;
-}
+} */
 
 .cardC {
     text-align: center;
