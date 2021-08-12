@@ -36,20 +36,19 @@ export default function ReactHookForm() {
         }
     };
     console.log('errors', errors)
-
     return (
         <div className='container'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor='firstName'>First name</label>
-                <input {...register("firstName", { required: true, maxLength: 20 })} id='firstName' />
-                {errors.firstName && <p>{errors.firstName.message}</p>}
+                <input {...register("firstName", { required: true })} id='firstName' />
+                {errors.firstName && <p>Your first name is required</p>}
 
                 <label htmlFor='lastName'>Last name</label>
-                <input {...register("lastName", { required: true, maxLength: 10 })} id='lastName' />
-                {errors.lastName && <p>{errors.lastName.message}</p>}
+                <input {...register("lastName", { required: true })} id='lastName' />
+                {errors.lastName && <p>Your last name is required</p>}
 
                 <label htmlFor='age'>Age</label>
-                <input {...register("age", { required: true, max: 150, valueAsNumber: true })} id='age' />
+                <input {...register("age", { required: true, max: 150, min: 7 })} id='age' type='number'/>
                 {errors.age && <p>{errors.age.message}</p>}
                 <select {...register("gender")} id='gender'>
                     <option value="female">female</option>
