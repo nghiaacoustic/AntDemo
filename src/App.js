@@ -16,6 +16,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import Grid from './Layouts/Grid/grid';
 
 const { Header } = Layout;
 
@@ -34,6 +35,7 @@ function App() {
             </Menu.Item>
             <Menu.Item key="2"><Link to="/cart" exact>CartDemo</Link></Menu.Item>
             <Menu.Item key="3"><Link to="/flexbox" exact>Flexbox</Link></Menu.Item>
+            <Menu.Item key="4"><Link to="/grid" exact>Grid</Link></Menu.Item>
           </Menu>
         </Header>
       </Layout>
@@ -54,6 +56,9 @@ function App() {
         </Route>
         <Route path="/flexbox" exact>
           <Flexbox/>
+        </Route>
+        <Route path="/grid" exact>
+          <Grid/>
         </Route>
         <Route>
           <PageNotFound />

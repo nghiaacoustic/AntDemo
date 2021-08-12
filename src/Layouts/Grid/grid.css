@@ -1,0 +1,47 @@
+
+.images {
+    display: grid;
+    grid-gap: 36px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(293px, 1fr));
+}
+
+.image-item {
+    border-radius: 10px;
+    height: 240px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 12px;
+    scroll-snap-align: center;
+    transition: all .5s;
+}
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+@media screen and (max-width: 768px) {
+    .images {
+        grid-template-columns: unset;
+        /* tạo flow theo cột */
+        grid-auto-flow: column;
+        /* set width cho item; */
+        grid-auto-columns: 80%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-snap-stop: always;
+        scroll-padding: 12px;
+    }
+    .image-item {
+        /* position của item (end, start, center)*/
+        scroll-snap-align: center;
+    }
+    .images {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .images::-webkit-scrollbar {
+        display: none;
+    }
+}
