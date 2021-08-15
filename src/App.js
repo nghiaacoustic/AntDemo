@@ -18,6 +18,7 @@ import {
   Link,
 } from "react-router-dom";
 import Grid from './Layouts/Grid/grid';
+import StyledComponent from './Layouts/StyledComponent';
 
 const { Header } = Layout;
 
@@ -37,7 +38,8 @@ function App() {
             <Menu.Item key="2" style={{ marginRight: '10px' }}><Link to="/cart" exact>CartDemo</Link></Menu.Item>
             <Menu.Item key="3" style={{ marginRight: '10px' }}><Link to="/flexbox" exact>Flexbox</Link></Menu.Item>
             <Menu.Item key="4" style={{ marginRight: '10px' }}><Link to="/grid" exact>Grid</Link></Menu.Item>
-            <Menu.Item key="5" style={{ marginRight: '10px' }}><Link to="/rhf" exact>ReactHookForm</Link></Menu.Item>
+            <Menu.Item key="5" style={{ marginRight: '10px' }}><Link to="/react-form-hook" exact>ReactHookForm</Link></Menu.Item>
+            <Menu.Item key="6" style={{ marginRight: '10px' }}><Link to="/styled-component" exact>StyledComponent</Link></Menu.Item>
           </Menu>
         </Header>
       </Layout>
@@ -62,8 +64,11 @@ function App() {
         <Route path="/grid" exact>
           <Grid />
         </Route>
-        <Route path="/rhf" exact>
+        <Route path="/react-form-hook" exact>
           <ReactHookForm />
+        </Route>
+        <Route path="/styled-component" exact>
+          <StyledComponent />
         </Route>
         <Route>
           <PageNotFound />
