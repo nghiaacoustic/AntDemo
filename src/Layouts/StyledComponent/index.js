@@ -9,14 +9,15 @@ import { BsUpload } from 'react-icons/bs'
 import { Button } from '../../components/Button/Button';
 import { Table, Tbody, Thead, Tr, Td, Th } from '../../components/Table/Table';
 import { connect } from 'react-redux'
-import { actAddTask, actChangeTheme, actDeleteTask, actDoneTask, actupdateTask } from '../../redux/actions/TodoListAction';
+import { actAddTask, actChangeTheme, actDeleteTask, actDoneTask, actEditTask, actUpdateTask, actupdateTask } from '../../redux/actions/TodoListAction';
 import { themes } from '../../components/Themes';
 import Swal from 'sweetalert2'
 
 class StyledComponent extends Component {
 
     state = {
-        taskName: ''
+        taskName: '',
+        disabled: true,
     }
 
     renderTaskTodo = () => {
@@ -29,18 +30,10 @@ class StyledComponent extends Component {
                         <Button onClick={() => { this.props.doneTask(task.id) }}>
                             <AiOutlineCheckSquare />
                         </Button>
-                        <Button onClick={async () => {
-                            const { value: text } = await Swal.fire({
-                                title: 'Input your task',
-                                input: 'text',
-                                inputLabel: 'Your new task',
-                                inputPlaceholder: 'Input here'
-                            })
-
-                            if (text) {
-                                this.props.updateTask(task.id, text);
-                            }
-                        }}>
+                        <Button
+                            onClick={() => this.setState({
+                                disabled: false
+                            }, () => this.props.editTask(task))}>
                             <AiOutlineEdit />
                         </Button>
                         <Button onClick={() => { this.props.deleteTask(task.id) }}>
@@ -73,6 +66,57 @@ class StyledComponent extends Component {
         })
     }
 
+    renderBtnAddTask = () => {
+        let { taskName } = this.state;
+        return <Button
+            onClick={() => {
+                let newTask = {
+                    id: Date.now(),
+                    taskName,
+                    done: false
+                }
+                this.props.addTask(newTask)
+            }}
+            style={{ margin: '0 5%' }}>
+            <AiOutlinePlusCircle />
+            Add task
+        </Button>
+    }
+
+    renderBtnUpdateTask = () => {
+        const { disabled } = this.state;
+        return disabled === true
+            ? <Button disabled>
+                <BsUpload />
+                Update task
+            </Button>
+            :
+            <Button
+                onClick={() => {
+                    let { taskName } = this.state;
+                    this.setState({
+                        disabled: true,
+                        taskName: ''
+                    },
+                        () => this.props.updateTask(taskName))
+                }}>
+                <BsUpload />
+                Update task
+            </Button>
+
+    }
+
+    // componentWillReceiveProps(newProps) {
+    //     this.setState({
+    //         taskName: newProps.taskEdit.taskName
+    //     })
+    // }
+
+    // static getDerivedStateFromProps(newProps, currentState) {
+    //     let newState = { ...currentState, taskName: newProps.taskEdit.taskName };
+    //     return newState;
+    // }
+
     render() {
         return (
             <ThemeProvider theme={this.props.theme}>
@@ -80,31 +124,23 @@ class StyledComponent extends Component {
                     <Dropdown
                         onChange={(e) => {
                             let { value } = e.target;
-                            this.props.changeTheme(value)
+                            this.props.changeTheme(value);
                         }}
                         style={{ margin: '3% 0' }}>
 
                         {this.renderTheme()}
                     </Dropdown>
                     <Heading3>To do list</Heading3>
-                        <TextField
-                            onChange={(e) => { this.setState({ taskName: e.target.value }) }}
-                            label='Task name'
-                            name='taskName'
-                        />
-                        <Button onClick={() => {
-                            let { taskName } = this.state;
-                            let newTask = {
-                                id: Date.now(),
-                                taskName,
-                                done: false
-                            }
-                            this.props.addTask(newTask)
-                        }} style={{margin:'0 5%'}}>
-                            <AiOutlinePlusCircle />
-                            Add task
-                        </Button>
-                        <Button><BsUpload />Update task</Button>
+                    <TextField
+                        onChange={(e) => { this.setState({ taskName: e.target.value }) }}
+                        label='Task name'
+                        name='taskName'
+                        value={this.state.taskName}
+                    />
+
+                    {this.renderBtnAddTask()}
+
+                    {this.renderBtnUpdateTask()}
 
                     <hr />
 
@@ -125,13 +161,21 @@ class StyledComponent extends Component {
             </ThemeProvider>
         )
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.taskEdit.id !== this.props.taskEdit.id) {
+            this.setState({ taskName: this.props.taskEdit.taskName })
+        }
+    }
+
 }
 
 
 const mapStateToProps = state => {
     return {
         theme: state.todoListReducer.themeToDoList,
-        taskList: state.todoListReducer.taskList
+        taskList: state.todoListReducer.taskList,
+        taskEdit: state.todoListReducer.taskEdit
     }
 }
 
@@ -149,9 +193,12 @@ const mapDispatchToProps = (dispatch) => {
         deleteTask: (taskId) => {
             dispatch(actDeleteTask(taskId))
         },
-        updateTask: (taskId, taskName) => {
-            dispatch(actupdateTask(taskId, taskName))
-        }
+        editTask: (task) => {
+            dispatch(actEditTask(task))
+        },
+        updateTask: (taskName) => {
+            dispatch(actUpdateTask(taskName))
+        },
     }
 }
 

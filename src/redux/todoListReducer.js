@@ -1,5 +1,5 @@
 import { DarkTheme } from "../components/Themes/DarkTheme";
-import { ADD_TASK, CHANGE_THEME, DELETE_TASK, DONE_TASK, UPDATE_TASK } from "./types/ToDoListType";
+import { ADD_TASK, CHANGE_THEME, DELETE_TASK, DONE_TASK, EDIT_TASK, UPDATE_TASK } from "./types/ToDoListType";
 import Swal from "sweetalert2";
 import { themes } from "../components/Themes";
 
@@ -12,6 +12,9 @@ const initialState = {
         { id: 'task-2', taskName: 'task 2', done: false },
         { id: 'task-3', taskName: 'task 3', done: true },
         { id: 'task-4', taskName: 'task 4', done: false }
+    ],
+    taskEdit: [
+        { id: '-1', taskName: '', done: false },
     ]
 }
 
@@ -55,21 +58,23 @@ export default (state = initialState, action) => {
             if (taskIndex !== -1) {
                 taskListUpdate1[taskIndex].done = true;
             }
-            return { ...state, taskList: taskListUpdate1 }
+            return { ...state, taskList: taskListUpdate1 };
         case DELETE_TASK:
             return { ...state, taskList: state.taskList.filter(task => task.id !== action.taskId) };
+        case EDIT_TASK:
+            return { ...state, taskEdit: action.task };
         case UPDATE_TASK:
-            const taskListUpdate2 = [...state.taskList];
-            let i = taskListUpdate2.findIndex(task => task.id === action.taskId);
-            if (i) {
-                let check = taskListUpdate2.find(task => task.taskName === action.taskName);
-                if (check) {
-                    alert('Task name already exits!');
-                    return { ...state };
-                }
-                taskListUpdate2[i].taskName = action.taskName;
+            state.taskEdit = { ...state.taskEdit, taskName: action.taskName };
+
+            let taskListUpdate2 = [...state.taskList];
+
+            let i = taskListUpdate2.findIndex(task => task.id === state.taskEdit.id);
+
+            if (i !== -1) {
+                taskListUpdate2[i] = state.taskEdit;
             }
-            return { ...state, taskList: taskListUpdate2 }
+
+            return { ...state, taskList: taskListUpdate2, taskEdit: { id: '-1', taskName: '', done: 'false' } }
         default:
             return { ...state }
     }
