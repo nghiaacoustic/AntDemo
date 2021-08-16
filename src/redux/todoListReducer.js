@@ -24,19 +24,19 @@ export default (state = initialState, action) => {
                     title: 'Oops...',
                     text: 'Something went wrong!',
                     footer: '<a href="">Please Iput the Task name?</a>'
-                })
+                });
                 return { ...state }
             }
             let taskListUpdate = [...state.taskList];
-            let index = taskListUpdate.findIndex(task => task.taskName === action.newTask.taskName)
+            let index = taskListUpdate.findIndex(task => task.taskName === action.newTask.taskName);
             if (index !== -1) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Something went wrong!',
                     footer: '<a href="">Task name already exits!</a>'
-                })
-                return { ...state }
+                });
+                return { ...state };
             }
             taskListUpdate.push(action.newTask);
             state.taskList = taskListUpdate;
@@ -45,27 +45,27 @@ export default (state = initialState, action) => {
             // console.log(action)
             let theme = themes.find(theme => theme.id == action.themeId);
             if (theme) {
-                state.themeToDoList = { ...theme.theme }
-                console.log(theme.theme)
+                state.themeToDoList = { ...theme.theme };
+                console.log(theme.theme);
             }
             return { ...state };
         case DONE_TASK:
-            let taskListUpdate1 = [...state.taskList]
+            let taskListUpdate1 = [...state.taskList];
             let taskIndex = taskListUpdate1.findIndex(task => task.id === action.taskId);
             if (taskIndex !== -1) {
                 taskListUpdate1[taskIndex].done = true;
             }
             return { ...state, taskList: taskListUpdate1 }
         case DELETE_TASK:
-            return { ...state, taskList: state.taskList.filter(task => task.id !== action.taskId) }
+            return { ...state, taskList: state.taskList.filter(task => task.id !== action.taskId) };
         case UPDATE_TASK:
             const taskListUpdate2 = [...state.taskList];
             let i = taskListUpdate2.findIndex(task => task.id === action.taskId);
             if (i) {
-                let check = taskListUpdate2.find(task => task.taskName === action.taskName)
+                let check = taskListUpdate2.find(task => task.taskName === action.taskName);
                 if (check) {
                     alert('Task name already exits!');
-                    return { ...state }
+                    return { ...state };
                 }
                 taskListUpdate2[i].taskName = action.taskName;
             }

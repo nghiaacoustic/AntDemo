@@ -52,11 +52,8 @@ function App() {
         <Route path="/home" exact>
           <Home />
         </Route>
-        <Route path="/cart">
+        <Route path="/cart" exact>
           <CartComponent />
-        </Route>
-        <Route path="/" exact>
-          <Home />
         </Route>
         <Route path="/flexbox" exact>
           <Flexbox />
@@ -69,6 +66,9 @@ function App() {
         </Route>
         <Route path="/styled-component" exact>
           <StyledComponent />
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
         <Route>
           <PageNotFound />

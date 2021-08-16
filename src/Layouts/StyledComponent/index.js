@@ -26,25 +26,25 @@ class StyledComponent extends Component {
                 <Tr key={index}>
                     <Th style={{ verticalAlign: 'middle' }}>{task.taskName}</Th>
                     <Th style={{ textAlign: 'right' }}>
-                        <Button
-                            onClick={() => { this.props.doneTask(task.id) }}
-                        ><AiOutlineCheckSquare /></Button>
-                        <Button
-                            onClick={async () => {
-                                const { value: text } = await Swal.fire({
-                                    title: 'Input your task',
-                                    input: 'text',
-                                    inputLabel: 'Your new task',
-                                    inputPlaceholder: 'Input here'
-                                })
+                        <Button onClick={() => { this.props.doneTask(task.id) }}>
+                            <AiOutlineCheckSquare />
+                        </Button>
+                        <Button onClick={async () => {
+                            const { value: text } = await Swal.fire({
+                                title: 'Input your task',
+                                input: 'text',
+                                inputLabel: 'Your new task',
+                                inputPlaceholder: 'Input here'
+                            })
 
-                                if (text) {
-                                    this.props.updateTask(task.id, text);
-                                }
-                            }}
-                        ><AiOutlineEdit /></Button>
-                        <Button
-                            onClick={() => { this.props.deleteTask(task.id) }}><AiOutlineDelete />
+                            if (text) {
+                                this.props.updateTask(task.id, text);
+                            }
+                        }}>
+                            <AiOutlineEdit />
+                        </Button>
+                        <Button onClick={() => { this.props.deleteTask(task.id) }}>
+                            <AiOutlineDelete />
                         </Button>
                     </Th>
                 </Tr>
@@ -57,8 +57,8 @@ class StyledComponent extends Component {
                 <Tr key={index}>
                     <Th style={{ verticalAlign: 'middle' }}>{task.taskName}</Th>
                     <Th style={{ textAlign: 'right' }}>
-                        <Button
-                            onClick={() => { this.props.deleteTask(task.id) }}><AiOutlineDelete />
+                        <Button onClick={() => { this.props.deleteTask(task.id) }}>
+                            <AiOutlineDelete />
                         </Button>
                     </Th>
                 </Tr>
@@ -74,35 +74,40 @@ class StyledComponent extends Component {
     }
 
     render() {
-        // console.log(this.props.taskList)
         return (
             <ThemeProvider theme={this.props.theme}>
                 <Container style={{ width: '50%' }}>
-                    <Dropdown onChange={(e) => {
-                        let { value } = e.target;
-                        this.props.changeTheme(value)
-                    }}>
+                    <Dropdown
+                        onChange={(e) => {
+                            let { value } = e.target;
+                            this.props.changeTheme(value)
+                        }}
+                        style={{ margin: '3% 0' }}>
+
                         {this.renderTheme()}
-                        {/* <option>Dark Theme</option>
-                        <option>Light Theme</option> */}
                     </Dropdown>
                     <Heading3>To do list</Heading3>
-                    <TextField
-                        onChange={(e) => { this.setState({ taskName: e.target.value }) }}
-                        label='Task name'
-                        name='taskName'
-                    />
-                    <Button onClick={() => {
-                        let { taskName } = this.state;
-                        let newTask = {
-                            id: Date.now(),
-                            taskName,
-                            done: false
-                        }
-                        this.props.addTask(newTask)
-                    }}><AiOutlinePlusCircle />Add task</Button>
-                    <Button><BsUpload />Update task</Button>
+                        <TextField
+                            onChange={(e) => { this.setState({ taskName: e.target.value }) }}
+                            label='Task name'
+                            name='taskName'
+                        />
+                        <Button onClick={() => {
+                            let { taskName } = this.state;
+                            let newTask = {
+                                id: Date.now(),
+                                taskName,
+                                done: false
+                            }
+                            this.props.addTask(newTask)
+                        }} style={{margin:'0 5%'}}>
+                            <AiOutlinePlusCircle />
+                            Add task
+                        </Button>
+                        <Button><BsUpload />Update task</Button>
+
                     <hr />
+
                     <Heading3>Task To do</Heading3>
                     <Table>
                         <Thead>
