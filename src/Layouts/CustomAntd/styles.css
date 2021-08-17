@@ -1,0 +1,22 @@
+.nav {
+  width: 100vw;
+  height: 20vh;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+  flex-grow: inherit;
+}
+
+.nav_logo {
+  flex-grow: 0;
+}
+
+.nav_search {
+  flex-grow: .2;
+}
+
+.nav_items {
+  flex-grow: .1;
+}

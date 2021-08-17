@@ -19,6 +19,7 @@ import {
 } from "react-router-dom";
 import Grid from './Layouts/Grid/grid';
 import StyledComponent from './Layouts/StyledComponent';
+import CustomAntd from './Layouts/CustomAntd/CustomAntd';
 
 const { Header } = Layout;
 
@@ -40,6 +41,7 @@ function App() {
             <Menu.Item key="4" style={{ marginRight: '10px' }}><Link to="/grid" exact>Grid</Link></Menu.Item>
             <Menu.Item key="5" style={{ marginRight: '10px' }}><Link to="/react-form-hook" exact>ReactHookForm</Link></Menu.Item>
             <Menu.Item key="6" style={{ marginRight: '10px' }}><Link to="/styled-component" exact>StyledComponent</Link></Menu.Item>
+            <Menu.Item key="7" style={{ marginRight: '10px' }}><Link to="/custom-antd" exact>CustomAntd</Link></Menu.Item>
           </Menu>
         </Header>
       </Layout>
@@ -66,6 +68,9 @@ function App() {
         </Route>
         <Route path="/styled-component" exact>
           <StyledComponent />
+        </Route>
+        <Route path="/custom-antd" exact>
+          <CustomAntd />
         </Route>
         <Route path="/">
           <Home />
