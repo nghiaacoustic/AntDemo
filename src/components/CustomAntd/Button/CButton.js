@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'antd';
 import styled from 'styled-components'
 
-const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)`
   color: palevioletred;
   font-weight: normal;
   :focus {
@@ -29,9 +29,8 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const CButton = () => {
-  return <StyledButton />
+//  StyledButton = () => {
+//   return <StyledButton />
+// }
 
-}
 
-export default CButton

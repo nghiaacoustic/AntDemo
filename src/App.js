@@ -20,6 +20,8 @@ import {
 import Grid from './Layouts/Grid/grid';
 import StyledComponent from './Layouts/StyledComponent';
 import CustomAntd from './Layouts/CustomAntd/CustomAntd';
+import PropTypesComponent from './Layouts/PropTypes';
+import Hooks from './Layouts/Hooks';
 
 const { Header } = Layout;
 
@@ -42,6 +44,8 @@ function App() {
             <Menu.Item key="5" style={{ marginRight: '10px' }}><Link to="/react-form-hook" exact>ReactHookForm</Link></Menu.Item>
             <Menu.Item key="6" style={{ marginRight: '10px' }}><Link to="/styled-component" exact>StyledComponent</Link></Menu.Item>
             <Menu.Item key="7" style={{ marginRight: '10px' }}><Link to="/custom-antd" exact>CustomAntd</Link></Menu.Item>
+            <Menu.Item key="8" style={{ marginRight: '10px' }}><Link to="/prop-types" exact>PropTypes</Link></Menu.Item>
+            <Menu.Item key="9" style={{ marginRight: '10px' }}><Link to="/hooks" exact>Hooks</Link></Menu.Item>
           </Menu>
         </Header>
       </Layout>
@@ -71,6 +75,12 @@ function App() {
         </Route>
         <Route path="/custom-antd" exact>
           <CustomAntd />
+        </Route>
+        <Route path="/prop-types" exact>
+          <PropTypesComponent />
+        </Route>
+        <Route path="/hooks" exact>
+          <Hooks />
         </Route>
         <Route path="/">
           <Home />
